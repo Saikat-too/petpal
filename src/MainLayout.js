@@ -1,8 +1,7 @@
 // Mainlayout Page 
 import React from 'react';
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
-
+import Header from './components/Header/Header';
+import Footer from './components/Footer/footer';
 const MainLayout = ({ children }) => {
   return (
     <div className="main-layout">
