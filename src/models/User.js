@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema({
             },
             message: props => `${props.value} is not a strong enough password.`
           },
-        min : 8 ,
+      
       },
       picturePath :{
          type : String , 
@@ -48,11 +48,12 @@ const UserSchema = new mongoose.Schema({
         state: String,
         postalCode: String,
       },
-      doctors:{
-        type : Array,
-        default : [],
-      },
-      
+      appointments: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Appointment', // Reference to appointments for clients
+        },
+      ],
      
 });
 
