@@ -1,3 +1,4 @@
+import { type } from "@testing-library/user-event/dist/type";
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
@@ -47,14 +48,11 @@ const UserSchema = new mongoose.Schema({
         state: String,
         postalCode: String,
       },
-      pets: [
-        {
-          type: String,
-          breed: String,
-          age: Number,
-          name: String,
-        },
-      ],
+      doctors:{
+        type : Array,
+        default : [],
+      },
+      
      
 });
 
