@@ -51,7 +51,7 @@ const UserSchema = new mongoose.Schema({
       appointments: [
         {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'Appointment', // Reference to appointments for clients
+          ref: 'Appointment', 
         },
       ],
      
