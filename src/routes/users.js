@@ -1,8 +1,8 @@
 import express from "express";
 import {
     getUser,
-    getuserDoctors,
-    addRemoveDoctor,
+    getuserAppointments,
+    addRemoveAppointments,
     
 } from "../controllers/users.js" ;
 
@@ -13,10 +13,10 @@ const router = express.Router() ;
 /* Read */ 
 
 router.get("/:id" , verifyToken , getUser);
-router.get("/:id/doctors" , verifyToken , getuserDoctors);
+router.get("/:id/appointments" , verifyToken , getuserAppointments);
 
 /* Update */ 
-router.patch("/:id/:doctorID" , verifyToken , addRemoveDoctor);
+router.patch("/:id/:appointments" , verifyToken , addRemoveAppointments);
 
 
 export default router ; 
