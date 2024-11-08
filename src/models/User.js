@@ -28,6 +28,10 @@ const UserSchema = new mongoose.Schema({
           },
         min : 8 ,
       },
+      picturePath :{
+         type : String , 
+         default : "",
+      },
       phone: {
         type: String,
         required: true,
@@ -51,9 +55,7 @@ const UserSchema = new mongoose.Schema({
           name: String,
         },
       ],
-      createdAT : {
-        timestamps : true
-      },
+     
 });
 
 const User  = mongoose.model("User" , UserSchema);
