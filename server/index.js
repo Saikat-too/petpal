@@ -60,6 +60,6 @@ const PORT = process.env.PORT || 6001;
 mongoose.connect(process.env.MONGO_URL).then(() => {
   app.listen(PORT , () => console.log(`Server Port : ${PORT}`));
 
-  User.insertMany(users);
-  Doctor.insertMany(doctors);
+ // User.insertMany(users);
+ // Doctor.insertMany(doctors);
 }).catch((error) => console.log(`${error} did not connect`)) ; 
