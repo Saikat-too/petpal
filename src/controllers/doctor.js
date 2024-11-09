@@ -1,6 +1,6 @@
-import Doctor from '../models/Doctor';
-import Appointment from '../models/Appoinment';
-import bcrypt from 'bcryptjs';
+import Doctor from '../models/Doctors.js';
+import Appoinment from '../models/Appoinment.js';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 

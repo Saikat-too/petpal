@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const DoctorSchema = new mongoose.Schema({
   name: {
@@ -17,13 +17,7 @@ const DoctorSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    validate: {
-        validator: function(v) {
-          return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(v);
-        },
-        message: props => `${props.value} is not a strong enough password.`
-      },
-
+    min : 8 ,
   },
   phone: {
     type: String,
@@ -33,6 +27,7 @@ const DoctorSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
   availability: [
     {
       day: {
@@ -58,6 +53,12 @@ const DoctorSchema = new mongoose.Schema({
     enum: ['doctor'],
     default: 'doctor',
   },
+  appointments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Appointment', 
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
@@ -65,4 +66,4 @@ const DoctorSchema = new mongoose.Schema({
 });
 
 const Doctor = mongoose.model('Doctor', DoctorSchema);
-module.exports = Doctor;
+export default Doctor ;

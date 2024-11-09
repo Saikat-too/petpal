@@ -1,5 +1,5 @@
-import User from "../models/User";
-import Appoinment from "../models/Appoinment";
+import User from "../models/User.js";
+import Appoinment from "../models/Appoinment.js";
 
 /* Read */ 
 export const getUser = async(req , res) =>{
@@ -17,12 +17,12 @@ export const getuserAppointments = async(req , res) =>{
     try {
         const {id} = req.params ; 
         const user = await User.findById(id);
-        const appointments = await Appointment.find({ _id: { $in: user.appointments } })
+        const appointments = await Appoinment.find({ _id: { $in: user.appointments } })
         .populate('doctor') 
         .exec();
-        const formattedAppointments = appointments.map(({ _id, clientID, doctor, appointmentDate, reason, status }) => ({
+        const formattedAppointments = appointments.map(({ _id, clientID, doctorID, appointmentDate, reason, status }) => ({
             appointmentId: _id,
-            doctorName: doctor ? doctor.name : 'N/A', 
+            doctorName: doctorID ? doctorID.name : 'N/A', 
             appointmentDate,
             reason,
             status,
@@ -34,9 +34,7 @@ export const getuserAppointments = async(req , res) =>{
     }
 };
 
-/* Update */ 
-import User from "../models/User";
-import Appointment from "../models/Appointment";
+
 
 /* Add or Remove Appointment */
 export const addRemoveAppointment = async (req, res) => {
@@ -50,7 +48,7 @@ export const addRemoveAppointment = async (req, res) => {
     }
 
     
-    const appointment = await Appointment.findById(appointmentId);
+    const appointment = await Appoinment.findById(appointmentId);
     if (!appointment) {
       return res.status(404).json({ message: 'Appointment not found' });
     }
@@ -73,12 +71,12 @@ export const addRemoveAppointment = async (req, res) => {
     await user.save();
     await appointment.save();
 
-    const appointments = await Appointment.find({ _id: { $in: user.appointments } })
+    const appointments = await Appoinment.find({ _id: { $in: user.appointments } })
         .populate('doctor') 
         .exec();
-        const formattedAppointments = appointments.map(({ _id, clientID, doctor, appointmentDate, reason, status }) => ({
+        const formattedAppointments = appointments.map(({ _id, clientID, doctorID, appointmentDate, reason, status }) => ({
             appointmentId: _id,
-            doctorName: doctor ? doctor.name : 'N/A', 
+            doctorName: doctorID ? doctorID.name : 'N/A', 
             appointmentDate,
             reason,
             status,

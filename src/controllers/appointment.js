@@ -1,6 +1,6 @@
-import Appointment from "../models/Appoinment";
-import User from "../models/User";
-import Doctor from "../models/Doctor";
+import Appoinment from "../models/Appoinment.js";
+import User from "../models/User.js";
+import Doctor from "../models/Doctor.js";
 
 
 export const createAppointment = async (req, res) => {
@@ -12,7 +12,7 @@ export const createAppointment = async (req, res) => {
         if (!doctor) return res.status(404).json({ message: "Doctor not found" });
 
         
-        const newAppointment = new Appointment({
+        const newAppointment = new Appoinment({
             clientID,
             doctorID,
             appointmentDate,
@@ -37,7 +37,7 @@ export const getAppointmentsByUser = async (req, res) => {
         const { userID } = req.params;
         
         
-        const appointments = await Appointment.find({ clientID: userID })
+        const appointments = await Appoinment.find({ clientID: userID })
             .populate("doctorID", "name specialization") 
             .populate("clientID", "name"); 
 
@@ -53,7 +53,7 @@ export const getAppointmentsByDoctor = async (req, res) => {
         const { doctorID } = req.params;
         
         
-        const appointments = await Appointment.find({ doctorID })
+        const appointments = await Appoinment.find({ doctorID })
             .populate("clientID", "name") 
             .populate("doctorID", "name specialization"); 
 
@@ -70,7 +70,7 @@ export const updateAppointmentStatus = async (req, res) => {
         const { status } = req.body;
 
         
-        const updatedAppointment = await Appointment.findByIdAndUpdate(
+        const updatedAppointment = await Appoinment.findByIdAndUpdate(
             appointmentID,
             { status },
             { new: true }

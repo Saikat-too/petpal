@@ -1,4 +1,4 @@
-import { type } from "@testing-library/user-event/dist/type";
+
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
@@ -21,13 +21,7 @@ const UserSchema = new mongoose.Schema({
       password: {
         type: String,
         required: true,
-        validate: {
-            validator: function(v) {
-              return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(v);
-            },
-            message: props => `${props.value} is not a strong enough password.`
-          },
-      
+        min : 8,
       },
       picturePath :{
          type : String , 

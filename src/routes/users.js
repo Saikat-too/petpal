@@ -2,7 +2,7 @@ import express from "express";
 import {
     getUser,
     getuserAppointments,
-    addRemoveAppointments,
+    addRemoveAppointment,
     
 } from "../controllers/users.js" ;
 
@@ -16,7 +16,7 @@ router.get("/:id" , verifyToken , getUser);
 router.get("/:id/appointments" , verifyToken , getuserAppointments);
 
 /* Update */ 
-router.patch("/:id/:appointments" , verifyToken , addRemoveAppointments);
+router.patch("/:id/:appointments" , verifyToken , addRemoveAppointment);
 
 
 export default router ; 

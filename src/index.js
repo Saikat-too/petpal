@@ -12,6 +12,10 @@ import authRoutes from "./routes/auth.js"
 import userRoutes from "./routes/users.js"
 import doctorRoutes from "./routes/doctors.js"
 import { register } from "./controllers/auth.js";
+import User from "./models/User.js";
+import Doctor from "./models/Doctors.js"
+import Appoinment  from "./models/Appoinment.js";
+import {users , doctors} from "./data/index.js";
 /*Configurations */
 
 const __filename = fileURLToPath(import.meta.url);
@@ -55,4 +59,7 @@ app.use("/doctors" ,doctorRoutes);
 const PORT = process.env.PORT || 6001;
 mongoose.connect(process.env.MONGO_URL).then(() => {
   app.listen(PORT , () => console.log(`Server Port : ${PORT}`));
+
+  User.insertMany(users);
+  Doctor.insertMany(doctors);
 }).catch((error) => console.log(`${error} did not connect`)) ; 
