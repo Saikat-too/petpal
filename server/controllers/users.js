@@ -83,7 +83,7 @@ export const addRemoveAppointment = async (req, res) => {
       activityType : actionType,
       description,
 
-    })
+    });
 
     await activitylog.save();
 
