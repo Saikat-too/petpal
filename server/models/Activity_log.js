@@ -4,7 +4,7 @@ const ActivityLogSchema = new  mongoose.Schema({
 
     userId:{
         type : mongoose.Schema.Types.ObjectId ,
-        ref : 'clinet',
+        required : True ,
     },
     
     timestamp:{
