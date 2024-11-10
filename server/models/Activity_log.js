@@ -6,14 +6,7 @@ const ActivityLogSchema = new  mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId ,
         ref : 'clinet',
     },
-    doctorId : {
-        type : mongoose.Schema.Types.ObjectId , 
-        ref : 'doctor',
-    },
-    appointmentId:{
-        type : mongoose.Schema.Types.ObjectId,
-        ref : 'appointment',
-    },
+    
     timestamp:{
         type : Date , 
         default : Date.now
