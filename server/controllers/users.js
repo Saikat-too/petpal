@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import Appoinment from "../models/Appoinment.js";
+import ActivityLog from "../models/Activity_log.js";
 
 /* Read */ 
 export const getUser = async(req , res) =>{
@@ -70,6 +71,21 @@ export const addRemoveAppointment = async (req, res) => {
 
     await user.save();
     await appointment.save();
+
+    const description = hasAppointment
+      ? `User removed appointment with ID ${appointmentId}`
+      : `User added appointment with ID ${appointmentId}`;
+    const actionType = hasAppointment ? 'REMOVE_APPOINTMENT' : 'ADD_APPOINTMENT';
+
+    const activitylog = new ActivityLog({
+      userId ,
+      timestamp : new Date() ,
+      activityType : actionType,
+      description,
+
+    })
+
+    await activitylog.save();
 
     const appointments = await Appoinment.find({ _id: { $in: user.appointments } })
         .populate('doctor') 
